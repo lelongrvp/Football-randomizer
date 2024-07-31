@@ -4,11 +4,20 @@ import { Input } from "./components/ui/input";
 import { Card, CardContent, CardTitle } from "./components/ui/card";
 import { Button } from "./components/ui/button";
 import { toast } from "./components/ui/use-toast";
+import { Firework } from "./FireworkEffect";
 
 const App = () => {
   const [name, setName] = useState<string>("");
   const [team1, setTeam1] = useState<string[]>([]);
   const [team2, setTeam2] = useState<string[]>([]);
+  const [showFirework, setShowFirework] = useState<boolean>(false);
+
+  const showFireworkEffect = () => {
+    setShowFirework(true);
+    setTimeout(() => {
+      setShowFirework(false);
+    }, 3000);
+  };
 
   const handleClick = () => {
     if (name === "") {
@@ -16,19 +25,17 @@ const App = () => {
       return;
     }
 
-    // Check for duplicate names
     if (team1.includes(name) || team2.includes(name)) {
       toast({ description: "Tên đã tồn tại trong một đội." });
       return;
     }
 
-    // Random 1 or 2
     const result = Math.floor(Math.random() * 2) + 1;
-
     if (result === 1) {
       if (team1.length < 8) {
         setTeam1([...team1, name]);
         toast({ description: `Thành viên ${name} đã được chia vào đội 1` });
+        showFireworkEffect();
       } else {
         toast({ description: "Đội 1 đã đủ 8 thành viên." });
       }
@@ -36,11 +43,11 @@ const App = () => {
       if (team2.length < 8) {
         setTeam2([...team2, name]);
         toast({ description: `Thành viên ${name} đã được chia vào đội 2` });
+        showFireworkEffect();
       } else {
         toast({ description: "Đội 2 đã đủ 8 thành viên." });
       }
     }
-
     setName("");
   };
 
@@ -56,6 +63,7 @@ const App = () => {
 
   return (
     <div>
+      {showFirework && <Firework />}
       <div className="flex gap-10 m-10">
         <Input
           placeholder="Điền tên cầu thủ..."
