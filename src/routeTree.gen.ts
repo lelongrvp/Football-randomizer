@@ -17,7 +17,7 @@ import { Route as rootRoute } from './routes/__root'
 // Create Virtual Routes
 
 const SlowSplitLazyImport = createFileRoute('/slowSplit')()
-const FastSplitLazyImport = createFileRoute('/fastSplit')()
+const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
 
@@ -26,20 +26,20 @@ const SlowSplitLazyRoute = SlowSplitLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/slowSplit.lazy').then((d) => d.Route))
 
-const FastSplitLazyRoute = FastSplitLazyImport.update({
-  path: '/fastSplit',
+const IndexLazyRoute = IndexLazyImport.update({
+  path: '/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/fastSplit.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/fastSplit': {
-      id: '/fastSplit'
-      path: '/fastSplit'
-      fullPath: '/fastSplit'
-      preLoaderRoute: typeof FastSplitLazyImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
     '/slowSplit': {
@@ -55,7 +55,7 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren({
-  FastSplitLazyRoute,
+  IndexLazyRoute,
   SlowSplitLazyRoute,
 })
 
@@ -67,12 +67,12 @@ export const routeTree = rootRoute.addChildren({
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/fastSplit",
+        "/",
         "/slowSplit"
       ]
     },
-    "/fastSplit": {
-      "filePath": "fastSplit.lazy.tsx"
+    "/": {
+      "filePath": "index.lazy.tsx"
     },
     "/slowSplit": {
       "filePath": "slowSplit.lazy.tsx"

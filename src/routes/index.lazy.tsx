@@ -8,7 +8,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 
-export const Route = createLazyFileRoute("/fastSplit")({
+export const Route = createLazyFileRoute("/")({
   component: FastSplit,
 });
 
