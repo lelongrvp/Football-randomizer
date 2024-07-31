@@ -1,12 +1,17 @@
 import { useState } from "react";
-import "./App.css";
-import { Input } from "./components/ui/input";
-import { Card, CardContent, CardTitle } from "./components/ui/card";
-import { Button } from "./components/ui/button";
-import { toast } from "./components/ui/use-toast";
-import { Firework } from "./FireworkEffect";
+import "@/App.css";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardTitle } from "../components/ui/card";
+import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
+import { Firework } from "@/components/FireworkEffect";
+import { createLazyFileRoute } from "@tanstack/react-router";
 
-const App = () => {
+export const Route = createLazyFileRoute("/slowSplit")({
+  component: SlowSplit,
+});
+
+function SlowSplit() {
   const [name, setName] = useState<string>("");
   const [team1, setTeam1] = useState<string[]>([]);
   const [team2, setTeam2] = useState<string[]>([]);
@@ -99,6 +104,6 @@ const App = () => {
       </div>
     </div>
   );
-};
+}
 
-export default App;
+export default SlowSplit;
