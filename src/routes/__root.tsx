@@ -13,13 +13,13 @@ export const Route = createRootRoute({
         <div className="flex gap-10">
           <Link
             to="/slowSplit"
-            className="[&.active]:font-bold [&.active]:border-solid [&.active]:border-slate-200 p-2 [&.active]:rounded-lg [&.active]:border-t [&.active]:border-l [&.active]:border-r"
+            className="[&.active]:font-bold [&.active]:border-solid [&.active]:border-slate-200 [&.active]:border p-2 [&.active]:rounded-lg [&.active]:border-b-0"
           >
             Chia từ từ
-          </Link>{" "}
+          </Link>
           <Link
             to="/fastSplit"
-            className="[&.active]:font-bold [&.active]:border-solid [&.active]:border-slate-200 p-2 [&.active]:rounded-lg [&.active]:border-t [&.active]:border-l [&.active]:border-r"
+            className="[&.active]:font-bold [&.active]:border-solid [&.active]:border-slate-200 [&.active]:border p-2 [&.active]:rounded-lg [&.active]:border-b-0"
           >
             Chia nhanh
           </Link>
